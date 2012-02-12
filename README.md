@@ -16,7 +16,7 @@ Then `bundle install`.
 
 ```ruby
 use OmniAuth::Builder do
-  provider :eventbrite, ENV['DAILYMOTION_CLIENT_ID'], ENV['DAILYMOTION_SECRET']
+  provider :eventbrite, ENV['EVENTBRITE_CLIENT_ID'], ENV['EVENTBRITE_SECRET']
 end
 ```
 
