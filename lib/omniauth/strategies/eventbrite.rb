@@ -13,7 +13,7 @@ module OmniAuth
               :authorize_url => '/oauth/authorize',
               :token_url => '/oauth/token'
             }
-      uid { raw_info['id'] }
+      uid { raw_info['user_id'] }
       
       def authorize_params
         super.tap do |params|

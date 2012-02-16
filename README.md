@@ -7,7 +7,7 @@ This gem contains the Eventbrite strategy for OmniAuth 1.0.
 Add to your `Gemfile`:
 
 ```ruby
-gem 'omniauth-eventbrite', '~> 0.0.2'
+gem 'omniauth-eventbrite', '~> 0.0.3'
 ```
 
 Then `bundle install`.
