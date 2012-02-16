@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["kruttikagarwal@gmail.com"]
   s.homepage    = "https://github.com/k504866430/omniauth-eventbrite"
   s.summary     = "EventBrite strategy for Omniauth with OAuth 2.0"
-  s.description = %q{TODO: Write a gem description}
+  s.description = "Eventbrite strategy for OmniAuth"
 
   s.rubyforge_project = "omniauth-eventbrite"
 
