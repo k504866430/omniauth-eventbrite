@@ -7,7 +7,7 @@ This gem contains the Eventbrite strategy for OmniAuth 1.0.
 Add to your `Gemfile`:
 
 ```ruby
-gem 'omniauth-eventbrite', '~> 0.0.1'
+gem 'omniauth-eventbrite', '~> 0.0.2'
 ```
 
 Then `bundle install`.
@@ -16,9 +16,11 @@ Then `bundle install`.
 
 ```ruby
 use OmniAuth::Builder do
-  provider :eventbrite, ENV['EVENTBRITE_CLIENT_ID'], ENV['EVENTBRITE_SECRET']
+  provider :eventbrite, ENV['EVENTBRITE_CLIENT_ID'], ENV['EVENTBRITE_CLIENT_SECRET']
 end
 ```
+
+You can find your client secret on the same page where your application API key is.
 
 ## License
 
