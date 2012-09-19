@@ -33,7 +33,7 @@ module OmniAuth
       info do
         prune!({
           'email' => raw_info['email'],
-          'name' => raw_info['first_name'] + " " + raw_info['last_name'],
+          'name' => construct_full_name(raw_info['first_name'], raw_info['last_name']),
           'first_name' => raw_info['first_name'],
           'last_name' => raw_info['last_name'],
         })
@@ -50,6 +50,15 @@ module OmniAuth
       end
       
       private
+
+      def construct_full_name(first_name, last_name)
+        if first_name and last_name
+          "#{first_name} #{last_name}"
+        else
+          first_name || last_name || nil
+        end
+      end
+
       def prune!(hash)
         hash.delete_if do |_, value|
           prune!(value) if value.is_a?(Hash)
