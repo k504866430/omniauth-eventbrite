@@ -1,6 +1,8 @@
 require 'spec_helper'
 require 'omniauth-eventbrite'
 
+OmniAuth.config.test_mode = true
+
 describe OmniAuth::Strategies::Eventbrite do
   subject do
     OmniAuth::Strategies::Eventbrite.new(nil, @options || {})
