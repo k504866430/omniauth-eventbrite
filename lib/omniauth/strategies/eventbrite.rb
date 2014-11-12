@@ -16,6 +16,12 @@ module OmniAuth
 
       def authorize_params
         super.tap do |params|
+          %w[ref].each do |v|
+            if request.params[v]
+              params[v.to_sym] = request.params[v]
+            end
+          end
+
           params[:response_type] ||= DEFAULT_RESPONSE_TYPE
           params[:client_id] = client.id
         end
