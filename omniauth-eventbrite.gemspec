@@ -1,24 +1,23 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "omniauth/eventbrite/version"
+# coding: utf-8
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'omniauth/eventbrite/version'
 
-Gem::Specification.new do |s|
-  s.name        = "omniauth-eventbrite"
-  s.version     = Omniauth::Eventbrite::VERSION
-  s.authors     = ["Kruttik Aggarwal"]
-  s.email       = ["kruttikagarwal@gmail.com"]
-  s.homepage    = "https://github.com/k504866430/omniauth-eventbrite"
-  s.summary     = "EventBrite strategy for Omniauth with OAuth 2.0"
-  s.description = "Eventbrite strategy for OmniAuth"
+Gem::Specification.new do |spec|
+  spec.name        = 'omniauth-eventbrite'
+  spec.version     = Omniauth::Eventbrite::VERSION
+  spec.authors     = ['Kruttik Aggarwal']
+  spec.email       = ['kruttikagarwal@gmail.com']
+  spec.homepage    = 'https://github.com/k504866430/omniauth-eventbrite'
+  spec.summary     = 'Eventbrite OAuth2 strategy for OmniAuth'
+  spec.description = spec.summary
 
-  s.rubyforge_project = "omniauth-eventbrite"
+  spec.files         = `git ls-files`.split("\n")
+  spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  spec.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  spec.require_paths = ['lib']
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
-
-  s.add_runtime_dependency 'omniauth-oauth2', '~> 1.0'
-  s.add_development_dependency 'rspec', '~> 2.7.0'
-  s.add_development_dependency 'rake'
+  spec.add_dependency 'omniauth-oauth2', '~> 1.0'
+  spec.add_development_dependency 'rspec', '~> 2.7.0'
+  spec.add_development_dependency 'rake'
 end
