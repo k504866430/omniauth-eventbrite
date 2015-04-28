@@ -1,4 +1,5 @@
 require 'omniauth-eventbrite'
+require 'pry'
 require 'rspec'
 
 require_relative 'support/shared_examples'
