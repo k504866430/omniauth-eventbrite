@@ -5,18 +5,24 @@ module OmniAuth
     class Eventbrite < OmniAuth::Strategies::OAuth2
       DEFAULT_RESPONSE_TYPE = 'code'
       DEFAULT_GRANT = 'authorization_code'
-      
+
       option :name, "eventbrite"
-      
+
       option :client_options, {
               :site => "https://www.eventbrite.com",
               :authorize_url => '/oauth/authorize',
               :token_url => '/oauth/token'
             }
       uid { raw_info['user_id'].to_s }
-      
+
       def authorize_params
         super.tap do |params|
+          %w[ref].each do |v|
+            if request.params[v]
+              params[v.to_sym] = request.params[v]
+            end
+          end
+
           params[:response_type] ||= DEFAULT_RESPONSE_TYPE
           params[:client_id] = client.id
         end
@@ -29,7 +35,7 @@ module OmniAuth
           params[:client_secret] = client.secret
         end
       end
-      
+
       info do
         prune!({
           'email' => raw_info['email'],
@@ -38,7 +44,7 @@ module OmniAuth
           'last_name' => raw_info['last_name'],
         })
       end
-      
+
       extra do
         prune!({
           'raw_info' => raw_info
@@ -48,7 +54,7 @@ module OmniAuth
       def raw_info
         @raw_info ||= access_token.get('/json/user_get').parsed['user'] || {}
       end
-      
+
       private
 
       def construct_full_name(first_name, last_name)
