@@ -49,7 +49,7 @@ module OmniAuth
         first_name = raw_info['first_name'] || ''
         last_name = raw_info['last_name'] || ''
 
-        "#{first_name} #{last_name}" || nil
+        "#{first_name} #{last_name}".strip || nil
       end
 
       def prune!(hash)

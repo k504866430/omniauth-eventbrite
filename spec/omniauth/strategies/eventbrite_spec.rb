@@ -48,4 +48,78 @@ RSpec.describe OmniAuth::Strategies::Eventbrite do
 
     it { is_expected.to eq('/auth/eventbrite/callback') }
   end
+
+  describe '#info' do
+    before { allow(strategy).to receive(:raw_info).and_return(response) }
+
+    subject(:info) { strategy.info }
+
+    context 'with complete information' do
+      let(:response) do
+        {'first_name' => 'Test',
+         'last_name' => 'User',
+         'user_id' => 123_456_789,
+         'date_modified' => '2015-04-27 21:59:40',
+         'date_created' => '2015-04-27 21:47:16',
+         'email' => 'test@example.com'}
+      end
+
+      describe 'email' do
+        subject { info['email'] }
+
+        it { is_expected.to eq('test@example.com') }
+      end
+
+      describe 'first_name' do
+        subject { info['first_name'] }
+
+        it { is_expected.to eq('Test') }
+      end
+
+      describe 'full_name' do
+        subject { info['name'] }
+
+        it { is_expected.to eq('Test User') }
+      end
+
+      describe 'last_name' do
+        subject { info['last_name'] }
+
+        it { is_expected.to eq('User') }
+      end
+    end
+
+    context 'with incomplete information' do
+      let(:response) do
+        {'date_created' => '2015-04-27 21:47:16',
+         'user_id' => 123_456_789,
+         'email' => 'test@example.com',
+         'date_modified' => '2015-04-27 21:47:17'}
+      end
+
+      describe 'email' do
+        subject { info['email'] }
+
+        it { is_expected.to eq('test@example.com') }
+      end
+
+      describe 'first_name' do
+        subject { info['first_name'] }
+
+        it { is_expected.to be_nil }
+      end
+
+      describe 'full_name' do
+        subject { info['name'] }
+
+        it { is_expected.to be_nil }
+      end
+
+      describe 'last_name' do
+        subject { info['last_name'] }
+
+        it { is_expected.to be_nil }
+      end
+    end
+  end
 end
