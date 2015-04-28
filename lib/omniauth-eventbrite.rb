@@ -1,1 +1,1 @@
-require "omniauth/eventbrite"
+require 'omniauth/eventbrite'
