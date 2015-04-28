@@ -1,4 +1,9 @@
-source "http://rubygems.org"
+source 'https://rubygems.org'
 
-# Specify your gem's dependencies in omniauth-eventbrite.gemspec
+gem 'rake'
+
+group :test do
+  gem 'rspec', '~> 2.7'
+end
+
 gemspec
