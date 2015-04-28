@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'https://github.com/k504866430/omniauth-eventbrite'
   spec.summary     = 'Eventbrite OAuth2 strategy for OmniAuth'
   spec.description = spec.summary
+  spec.license     = 'MIT'
 
   spec.files         = %w(CHANGELOG.md LICENSE.md README.md omniauth-eventbrite.gemspec) + Dir['lib/**/*.rb']
   spec.require_paths = ['lib']
