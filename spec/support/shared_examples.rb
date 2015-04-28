@@ -10,7 +10,9 @@ RSpec.shared_examples 'an oauth2 strategy' do
     end
 
     context 'when passed an authorize_options option' do
-      let(:options) { {authorize_options: [:scope, :foo], scope: 'bar', foo: 'baz'} }
+      let(:options) do
+        {authorize_options: [:scope, :foo], scope: 'bar', foo: 'baz'}
+      end
 
       it 'includes the specified options' do
         expect(strategy.authorize_params['scope']).to eq('bar')
@@ -31,7 +33,9 @@ RSpec.shared_examples 'an oauth2 strategy' do
   end
 
   context 'when passed a token_options option' do
-    let(:options) { {token_options: [:scope, :foo], scope: 'bar', foo: 'baz'} }
+    let(:options) do
+      {token_options: [:scope, :foo], scope: 'bar', foo: 'baz'}
+    end
 
     it 'includes the specified options' do
       expect(strategy.token_params['scope']).to eq('bar')
@@ -42,7 +46,9 @@ end
 
 RSpec.shared_examples 'an oauth2 strategy client' do
   context 'when passed client_options' do
-    let(:options) { {client_options: {'authorize_url' => 'https://example.com'}} }
+    let(:options) do
+      {client_options: {'authorize_url' => 'https://example.com'}}
+    end
 
     it 'is initialized with symbolized client_options' do
       expect(client.options[:authorize_url]).to eq('https://example.com')

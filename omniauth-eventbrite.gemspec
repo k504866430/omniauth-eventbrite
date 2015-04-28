@@ -1,5 +1,5 @@
 # coding: utf-8
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'omniauth/eventbrite/version'
 
@@ -13,7 +13,8 @@ Gem::Specification.new do |spec|
   spec.description = spec.summary
   spec.license     = 'MIT'
 
-  spec.files         = %w(CHANGELOG.md LICENSE.md README.md omniauth-eventbrite.gemspec) + Dir['lib/**/*.rb']
+  spec.files = %w(CHANGELOG.md LICENSE.md README.md omniauth-eventbrite.gemspec)
+  spec.files += Dir['lib/**/*.rb']
   spec.require_paths = ['lib']
 
   spec.add_dependency 'omniauth-oauth2', '~> 1.0'
