@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary     = 'Eventbrite OAuth2 strategy for OmniAuth'
   spec.description = spec.summary
 
-  spec.files         = `git ls-files`.split("\n")
+  spec.files         = %w(CHANGELOG.md LICENSE.md README.md omniauth-eventbrite.gemspec) + Dir['lib/**/*.rb']
   spec.require_paths = ['lib']
 
   spec.add_dependency 'omniauth-oauth2', '~> 1.0'
