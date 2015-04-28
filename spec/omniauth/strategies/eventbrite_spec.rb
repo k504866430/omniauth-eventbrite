@@ -1,32 +1,51 @@
-require 'spec_helper'
-require 'omniauth-eventbrite'
-
-OmniAuth.config.test_mode = true
-
-describe OmniAuth::Strategies::Eventbrite do
-  subject do
-    OmniAuth::Strategies::Eventbrite.new(nil, @options || {})
+RSpec.describe OmniAuth::Strategies::Eventbrite do
+  def app
+    lambda do |_|
+      [200, {}, ['Hello, world.']]
+    end
   end
 
-  it_should_behave_like 'an oauth2 strategy'
+  let(:fresh_strategy) { Class.new(OmniAuth::Strategies::Eventbrite) }
+  let(:options) { {} }
+
+  before { OmniAuth.config.test_mode = true }
+  after { OmniAuth.config.test_mode = false }
+
+  subject(:strategy) { fresh_strategy.new(app, options) }
+
+  it_behaves_like 'an oauth2 strategy'
 
   describe '#client' do
-    it 'should have the correct Eventbrite site' do
-      subject.client.site.should eq("https://www.eventbrite.com")
+    subject(:client) { strategy.client }
+
+    it_behaves_like 'an oauth2 strategy client'
+
+    describe '#options' do
+      subject(:client_options) { client.options }
+
+      describe '[:authorize_url]' do
+        subject { client_options[:authorize_url] }
+
+        it { is_expected.to eq('/oauth/authorize') }
+      end
+
+      describe '[:token_url]' do
+        subject { client_options[:token_url] }
+
+        it { is_expected.to eq('/oauth/token') }
+      end
     end
 
-    it 'should have the correct authorization url' do
-      subject.client.options[:authorize_url].should eq("/oauth/authorize")
-    end
+    describe '#site' do
+      subject { client.site }
 
-    it 'should have the correct token url' do
-      subject.client.options[:token_url].should eq('/oauth/token')
+      it { is_expected.to eq('https://www.eventbrite.com') }
     end
   end
 
   describe '#callback_path' do
-    it 'should have the correct callback path' do
-      subject.callback_path.should eq('/auth/eventbrite/callback')
-    end
+    subject { strategy.callback_path }
+
+    it { is_expected.to eq('/auth/eventbrite/callback') }
   end
 end

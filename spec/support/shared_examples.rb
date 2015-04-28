@@ -1,37 +1,51 @@
-# NOTE it would be useful if this lived in omniauth-oauth2 eventually
-shared_examples 'an oauth2 strategy' do
-  describe '#client' do
-    it 'should be initialized with symbolized client_options' do
-      @options = { :client_options => { 'authorize_url' => 'https://example.com' } }
-      subject.client.options[:authorize_url].should == 'https://example.com'
-    end
-  end
-
+RSpec.shared_examples 'an oauth2 strategy' do
   describe '#authorize_params' do
-    it 'should include any authorize params passed in the :authorize_params option' do
-      @options = { :authorize_params => { :foo => 'bar', :baz => 'zip' } }
-      subject.authorize_params['foo'].should eq('bar')
-      subject.authorize_params['baz'].should eq('zip')
+    context 'when passed an authorize_params option' do
+      let(:options) { {authorize_params: {foo: 'bar', baz: 'zip'}} }
+
+      it 'includes them' do
+        expect(strategy.authorize_params['foo']).to eq('bar')
+        expect(strategy.authorize_params['baz']).to eq('zip')
+      end
     end
 
-    it 'should include top-level options that are marked as :authorize_options' do
-      @options = { :authorize_options => [:scope, :foo], :scope => 'bar', :foo => 'baz' }
-      subject.authorize_params['scope'].should eq('bar')
-      subject.authorize_params['foo'].should eq('baz')
+    context 'when passed an authorize_options option' do
+      let(:options) { {authorize_options: [:scope, :foo], scope: 'bar', foo: 'baz'} }
+
+      it 'includes the specified options' do
+        expect(strategy.authorize_params['scope']).to eq('bar')
+        expect(strategy.authorize_params['foo']).to eq('baz')
+      end
     end
   end
 
   describe '#token_params' do
-    it 'should include any authorize params passed in the :authorize_params option' do
-      @options = { :token_params => { :foo => 'bar', :baz => 'zip' } }
-      subject.token_params['foo'].should eq('bar')
-      subject.token_params['baz'].should eq('zip')
-    end
+    context 'when passed a token_params option' do
+      let(:options) { {token_params: {foo: 'bar', baz: 'zip'}} }
 
-    it 'should include top-level options that are marked as :authorize_options' do
-      @options = { :token_options => [:scope, :foo], :scope => 'bar', :foo => 'baz' }
-      subject.token_params['scope'].should eq('bar')
-      subject.token_params['foo'].should eq('baz')
+      it 'includes them' do
+        expect(strategy.token_params['foo']).to eq('bar')
+        expect(strategy.token_params['baz']).to eq('zip')
+      end
+    end
+  end
+
+  context 'when passed a token_options option' do
+    let(:options) { {token_options: [:scope, :foo], scope: 'bar', foo: 'baz'} }
+
+    it 'includes the specified options' do
+      expect(strategy.token_params['scope']).to eq('bar')
+      expect(strategy.token_params['foo']).to eq('baz')
+    end
+  end
+end
+
+RSpec.shared_examples 'an oauth2 strategy client' do
+  context 'when passed client_options' do
+    let(:options) { {client_options: {'authorize_url' => 'https://example.com'}} }
+
+    it 'is initialized with symbolized client_options' do
+      expect(client.options[:authorize_url]).to eq('https://example.com')
     end
   end
 end
