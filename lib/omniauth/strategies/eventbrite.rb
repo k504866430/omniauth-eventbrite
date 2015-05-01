@@ -5,13 +5,14 @@ module OmniAuth
     class Eventbrite < OmniAuth::Strategies::OAuth2
       DEFAULT_RESPONSE_TYPE = 'code'
       DEFAULT_GRANT = 'authorization_code'
+      INFO_URL = 'https://www.eventbriteapi.com/v3/users/me/'.freeze
 
       option :name, 'eventbrite'
       option :client_options, site: 'https://www.eventbrite.com',
                               authorize_url: '/oauth/authorize',
                               token_url: '/oauth/token'
 
-      uid { raw_info['user_id'].to_s }
+      uid { raw_info['id'].to_s }
 
       def authorize_params
         super.tap do |params|
@@ -29,8 +30,8 @@ module OmniAuth
       end
 
       info do
-        prune!('email' => raw_info['email'],
-               'name' => full_name,
+        prune!('email' => retrieved_email,
+               'name' => raw_info['name'],
                'first_name' => raw_info['first_name'],
                'last_name' => raw_info['last_name'])
       end
@@ -40,7 +41,7 @@ module OmniAuth
       end
 
       def raw_info
-        @raw_info ||= access_token.get('/json/user_get').parsed['user'] || {}
+        @raw_info ||= access_token.get(INFO_URL).parsed || {}
       end
 
       private
@@ -57,6 +58,12 @@ module OmniAuth
           prune!(value) if value.is_a?(Hash)
           value.nil? || (value.respond_to?(:empty?) && value.empty?)
         end
+      end
+
+      def retrieved_email
+        primary = raw_info['emails'].detect { |e| e['primary'] }
+        primary ||= raw_info['emails'].first
+        primary['email']
       end
     end
   end

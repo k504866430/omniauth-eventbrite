@@ -50,18 +50,28 @@ RSpec.describe OmniAuth::Strategies::Eventbrite do
   end
 
   describe '#info' do
-    before { allow(strategy).to receive(:raw_info).and_return(response) }
+    let(:access_token) { instance_double('AccessToken') }
+    let(:parsed) { instance_double('Response', parsed: response) }
+
+    before do
+      allow(access_token).to receive(:get).and_return(parsed)
+      allow(strategy).to receive(:access_token).and_return(access_token)
+    end
 
     subject(:info) { strategy.info }
 
     context 'with complete information' do
       let(:response) do
-        {'first_name' => 'Test',
-         'last_name' => 'User',
-         'user_id' => 123_456_789,
-         'date_modified' => '2015-04-27 21:59:40',
-         'date_created' => '2015-04-27 21:47:16',
-         'email' => 'test@example.com'}
+        {
+          'first_name' => 'Test',
+          'last_name' => 'User',
+          'name' => 'Test User',
+          'user_id' => '123456789012',
+          'emails' => [
+            {'email' => 'nonprimary@example.com', 'verified' => false, 'primary' => false},
+            {'email' => 'test@example.com', 'verified' => false, 'primary' => true}
+          ]
+        }
       end
 
       describe 'email' do
@@ -91,16 +101,18 @@ RSpec.describe OmniAuth::Strategies::Eventbrite do
 
     context 'with incomplete information' do
       let(:response) do
-        {'date_created' => '2015-04-27 21:47:16',
-         'user_id' => 123_456_789,
-         'email' => 'test@example.com',
-         'date_modified' => '2015-04-27 21:47:17'}
+        {
+          'user_id' => '123456789012',
+          'emails' => [
+            {'email' => 'nonprimary@example.com', 'verified' => false, 'primary' => false},
+          ]
+        }
       end
 
       describe 'email' do
         subject { info['email'] }
 
-        it { is_expected.to eq('test@example.com') }
+        it { is_expected.to eq('nonprimary@example.com') }
       end
 
       describe 'first_name' do

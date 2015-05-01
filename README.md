@@ -1,6 +1,11 @@
 # OmniAuth Eventbrite
 
-This gem contains the Eventbrite strategy for OmniAuth 1.0.
+This gem contains the Eventbrite strategy for OmniAuth 2.0.
+
+*Notice*: Versions 0.0.1 through 0.0.5 use Eventbrite API v1, which is due to
+be deprecated within two months of 2015-04-30. Versions after that will use
+Eventbrite API v3. This will affect the user_id that you get back from the API
+but your auth_token should remain the same.
 
 ## Installing
 
