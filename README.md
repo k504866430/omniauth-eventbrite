@@ -27,6 +27,22 @@ end
 
 You can find your client secret on the same page where your application API key is.
 
+## Referral Program Code
+
+If you participate in the [Eventbrite Referral Program][referral], you can also
+include your referral code as a parameter in all of your OAuth2 authentications
+by including it in the builder block:
+
+```ruby
+use OmniAuth::Builder do
+  provider :eventbrite, ENV['EVENTBRITE_CLIENT_ID'],
+                        ENV['EVENTBRITE_CLIENT_SECRET'],
+                        ref: 'EVENTBRITE_REFERRAL_CODE'
+end
+```
+
+[referral]: https://www.eventbrite.com/referral-program/
+
 ## License
 
 Copyright (c) 2012 Kruttik Aggarwal
