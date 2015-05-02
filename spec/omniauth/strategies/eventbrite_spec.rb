@@ -15,6 +15,26 @@ RSpec.describe OmniAuth::Strategies::Eventbrite do
 
   it_behaves_like 'an oauth2 strategy'
 
+  describe '#authorize_params' do
+    subject(:authorize_params) { strategy.authorize_params }
+
+    context 'when a "ref" is set' do
+      let(:options) { {authorize_params: {ref: 'test123'}} }
+
+      it { is_expected.to have_key(:ref) }
+
+      describe '#[:ref]' do
+        subject { authorize_params[:ref] }
+
+        it { is_expected.to eq('test123') }
+      end
+    end
+
+    context 'when a "ref" is not set' do
+      it { is_expected.to_not have_key(:ref) }
+    end
+  end
+
   describe '#client' do
     subject(:client) { strategy.client }
 

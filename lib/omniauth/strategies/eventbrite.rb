@@ -8,6 +8,7 @@ module OmniAuth
       INFO_URL = 'https://www.eventbriteapi.com/v3/users/me/'.freeze
 
       option :name, 'eventbrite'
+      option :authorize_options, [:ref]
       option :client_options, site: 'https://www.eventbrite.com',
                               authorize_url: '/oauth/authorize',
                               token_url: '/oauth/token'
@@ -16,12 +17,6 @@ module OmniAuth
 
       def authorize_params
         super.tap do |params|
-          %w[ref].each do |v|
-            if request.params[v]
-              params[v.to_sym] = request.params[v]
-            end
-          end
-
           params[:response_type] ||= DEFAULT_RESPONSE_TYPE
           params[:client_id] = client.id
         end
