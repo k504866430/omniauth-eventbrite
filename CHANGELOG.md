@@ -8,8 +8,14 @@ This project adheres to [Semantic Versioning 2.0.0][semver].
 
 ### Changed
 
+- *Breaking*: Switched the identity retrieval to the newer API v3 endpoint.
+  This will cause any retrieved user_id to change to the v3 standard, which
+  is incompatible with the v1 API. Eventbrite is deprecating API v1 within
+  the next two months, so if this is breaks your code you should update to
+  the newer API.
 - Relaxed omniauth-oauth2 dependency to ~> 1.0 to ease use with other oauth2
   providers.
+- Added support for a "ref" parameter for the Eventbrite Referral Program.
 
 ## [0.0.5] - 2013-12-17
 
