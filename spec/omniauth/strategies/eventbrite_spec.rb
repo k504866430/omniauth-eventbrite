@@ -88,8 +88,16 @@ RSpec.describe OmniAuth::Strategies::Eventbrite do
           'name' => 'Test User',
           'user_id' => '123456789012',
           'emails' => [
-            {'email' => 'nonprimary@example.com', 'verified' => false, 'primary' => false},
-            {'email' => 'test@example.com', 'verified' => false, 'primary' => true}
+            {
+              'email' => 'nonprimary@example.com',
+              'verified' => false,
+              'primary' => false
+            },
+            {
+              'email' => 'test@example.com',
+              'verified' => false,
+              'primary' => true
+            }
           ]
         }
       end
@@ -124,7 +132,11 @@ RSpec.describe OmniAuth::Strategies::Eventbrite do
         {
           'user_id' => '123456789012',
           'emails' => [
-            {'email' => 'nonprimary@example.com', 'verified' => false, 'primary' => false},
+            {
+              'email' => 'nonprimary@example.com',
+              'verified' => false,
+              'primary' => false
+            }
           ]
         }
       end
