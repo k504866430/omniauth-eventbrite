@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning 2.0.0][semver].
 
 ### Changed
 
+- Nothing yet.
+
+## [0.0.6] - 2014-05-02
+
+### Changed
+
 - *Breaking*: Switched the identity retrieval to the newer API v3 endpoint.
   This will cause any retrieved user_id to change to the v3 standard, which
   is incompatible with the v1 API. Eventbrite is deprecating API v1 within
@@ -44,7 +50,8 @@ This project adheres to [Semantic Versioning 2.0.0][semver].
 - Bugfix: Raw hashes were not being pruned properly.
 
 [semver]: http://semver.org/spec/v2.0.0.html
-[unreleased]: https://github.com/k504866430/omniauth-eventbrite/compare/v0.0.5...HEAD
+[unreleased]: https://github.com/k504866430/omniauth-eventbrite/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/k504866430/omniauth-eventbrite/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/k504866430/omniauth-eventbrite/compare/v0.0.4...v0.0.5
 [0.0.4]: https://github.com/k504866430/omniauth-eventbrite/compare/v0.0.3...v0.0.4
 [0.0.3]: https://github.com/k504866430/omniauth-eventbrite/compare/v0.0.2...v0.0.3
