@@ -12,7 +12,7 @@ but your auth_token should remain the same.
 Add to your `Gemfile`:
 
 ```ruby
-gem 'omniauth-eventbrite', '~> 0.0.5'
+gem 'omniauth-eventbrite', '~> 0.0.6'
 ```
 
 Then `bundle install`.
