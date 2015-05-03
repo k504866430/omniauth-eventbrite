@@ -43,6 +43,13 @@ end
 
 [referral]: https://www.eventbrite.com/referral-program/
 
+## Versioning
+
+This library aims to adhere to [Semantic Versioning 2.0.0][semver]. Violations
+of this scheme should be reported as bugs.
+
+[semver]: http://semver.org/spec/v2.0.0.html
+
 ## License
 
 Copyright (c) 2012 Kruttik Aggarwal
