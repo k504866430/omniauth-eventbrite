@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
   spec.description = spec.summary
   spec.license     = 'MIT'
 
-  spec.files = %w(CHANGELOG.md LICENSE.md README.md omniauth-eventbrite.gemspec)
-  spec.files += Dir['lib/**/*.rb']
+  spec.files = %w(.yardopts CHANGELOG.md LICENSE.md README.md
+                  omniauth-eventbrite.gemspec) + Dir['lib/**/*.rb']
   spec.require_paths = ['lib']
 
   spec.add_dependency 'omniauth-oauth2', '~> 1.0'

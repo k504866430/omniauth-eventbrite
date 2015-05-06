@@ -7,4 +7,7 @@ RSpec::Core::RakeTask.new(:spec)
 require 'rubocop/rake_task'
 RuboCop::RakeTask.new(:rubocop)
 
-task default: [:rubocop, :spec]
+require 'inch/rake'
+Inch::Rake::Suggest.new('doc:suggest')
+
+task default: [:rubocop, 'doc:suggest', :spec]
