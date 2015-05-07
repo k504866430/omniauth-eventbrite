@@ -15,6 +15,7 @@ module OmniAuth
 
       uid { raw_info['id'].to_s }
 
+      # The OAuth2 client authorization parameters.
       def authorize_params
         super.tap do |params|
           params[:response_type] ||= DEFAULT_RESPONSE_TYPE
@@ -22,6 +23,7 @@ module OmniAuth
         end
       end
 
+      # The OAuth2 client authentication parameters.
       def token_params
         super.tap do |params|
           params[:grant_type] ||= DEFAULT_GRANT
@@ -41,6 +43,9 @@ module OmniAuth
         prune!('raw_info' => raw_info)
       end
 
+      # Unfiltered data about the authenticating user.
+      #
+      # @return [Hash]
       def raw_info
         @raw_info ||= access_token.get(INFO_URL).parsed || {}
       end
