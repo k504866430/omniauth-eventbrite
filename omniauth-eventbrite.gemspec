@@ -17,6 +17,6 @@ Gem::Specification.new do |spec|
                   omniauth-eventbrite.gemspec) + Dir['lib/**/*.rb']
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'omniauth-oauth2', '~> 1.0'
+  spec.add_dependency 'omniauth-oauth2', '~> 1.2'
   spec.add_development_dependency 'bundler', '~> 1.0'
 end
